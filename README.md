@@ -1,1 +1,1 @@
-# scene-boilerplate
+# artgpt-scene-boilerplate
