@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "zip": "bestzip ./src.zip ./dist/*",
+    "zip": "bestzip ./package.zip ./dist/*",
     "publish": "run-s build zip"
   },
   "devDependencies": {
