@@ -1,9 +1,11 @@
-function get_url_parameters() {
+import $ from 'jquery';
+
+const get_url_parameters = () => {
     const params = new URLSearchParams(window.location.search);
     return Object.fromEntries(params.entries());
-}
+};
 
-function execute(render_function) {
+const execute = (render_function) =>  {
     let params = get_url_parameters()
     $.ajax({
         url: params.input_data || 'http://localhost:9000/input_data',
@@ -32,17 +34,13 @@ function execute(render_function) {
     });
 }
 
-
-function render_completed() {
+const render_completed = () => {
     window.isAnimated = true;
     document.isAnimated = true;
+};
+
+export {
+    execute,
+    render_completed
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof render_function === 'function') {
-        execute(render_function);
-    } else {
-        console.error('Render function not defined')
-    }
-}, false);
