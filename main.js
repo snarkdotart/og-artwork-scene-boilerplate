@@ -6,6 +6,8 @@ const render_completed = () => {
     document.isAnimated = true;
 };
 
+window.render_completed = render_completed;
+
 const get_url_parameters = () => {
     const params = new URLSearchParams(window.location.search);
     return Object.fromEntries(params.entries());
@@ -40,10 +42,11 @@ const execute = (render_function) =>  {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (typeof render_function === 'function') {
-        execute(render_function);
-    } else {
-        console.error('Render function not defined')
-    }
+    render_function({},document.getElementById("render"))
+    // if (typeof render_function === 'function') {
+    //     execute(render_function);
+    // } else {
+    //     console.error('Render function not defined')
+    // }
 }, false);
 

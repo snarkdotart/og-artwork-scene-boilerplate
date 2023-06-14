@@ -1,5 +1,3 @@
-import {render_completed} from "./srp-tools.js";
-
 const getRandomColor = () => {
     const hue = Math.floor(Math.random() * 361);
     return `hsl(${hue}, 100%, 50%)`;
