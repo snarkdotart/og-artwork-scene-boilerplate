@@ -1,3 +1,3 @@
-# ArtGPT Boilerplate Scene
+# OG Artwork Scene Boilerplate
 
 
