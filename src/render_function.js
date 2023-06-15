@@ -1,4 +1,8 @@
-function render_function(data, canvas) {
+const getRandomColor = () => {
+    const hue = Math.floor(Math.random() * 361);
+    return `hsl(${hue}, 100%, 50%)`;
+};
+const render_function = (data, canvas) => {
     let ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = true;
     let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -16,9 +20,8 @@ function render_function(data, canvas) {
     ctx.fillText(text, x, y);
     // on render completed
     render_completed()
-}
+};
 
-function getRandomColor() {
-  const hue = Math.floor(Math.random() * 361);
-  return  `hsl(${hue}, 100%, 50%)`;
+export {
+    render_function
 }
