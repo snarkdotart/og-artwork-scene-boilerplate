@@ -13,9 +13,9 @@ const get_url_parameters = () => {
     return Object.fromEntries(params.entries());
 };
 
-const execute = (render_function) =>  {
+const execute = (render) =>  {
     let params = get_url_parameters()
-    fetch(params.input_data || 'http://localhost:9000/input_data')
+    fetch(params.input_data || 'http://0.0.0.0:9000/input_data')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,14 +27,13 @@ const execute = (render_function) =>  {
             let canvas = document.getElementById("render");
             // set canvas size
             let resolution = data.resolution || [1920, 1080]
-            console.log('Resolution: ', resolution)
-            // set canvas size
+            console.log('Set Resolution: ', resolution)
             canvas.setAttribute("width", `${resolution[0]}`);
             canvas.setAttribute("height", `${resolution[1]}`);
             canvas.style.width = `${resolution[0]}px`;
             canvas.style.height = `${resolution[1]}px`;
             // start rendering
-            render_function(data, canvas);
+            render(data, canvas);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -42,11 +41,6 @@ const execute = (render_function) =>  {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    render_function({},document.getElementById("render"))
-    // if (typeof render_function === 'function') {
-    //     execute(render_function);
-    // } else {
-    //     console.error('Render function not defined')
-    // }
+    execute(render_function)
 }, false);
 
