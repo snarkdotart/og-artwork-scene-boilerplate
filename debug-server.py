@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Debug server for testing data.
+Debug server for serving dev JSON data.
 1. Start server.
 2. Open browser and go to: http://localhost:9000
 3. Edit data in debug.json file to change input data for generative scene.
