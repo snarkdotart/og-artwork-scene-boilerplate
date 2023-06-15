@@ -32,7 +32,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    host = os.getenv('DEBUG_HOST', 'localhost')
+    host = os.getenv('DEBUG_HOST', '0.0.0.0')
     port = int(os.getenv('DEBUG_PORT', 9000))
     httpd = HTTPServer((host, port), SimpleHTTPRequestHandler)
     print(f'Server started at http://{host}:{port}')
