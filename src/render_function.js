@@ -22,7 +22,7 @@ const render_function = (data, canvas) => {
     for (var i = 0; i < lines.length; i++) {
       ctx.fillText(lines[i], 10, 20 + (i * 20));
     }
-    render_completed()
+    window.render_completed()
 }
 
 export {
