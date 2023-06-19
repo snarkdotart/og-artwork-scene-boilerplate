@@ -47,3 +47,17 @@ To preview the build, run:
 ```bash
 npm run preview
 ```
+
+## Rendering
+You are encouraged to create your own rendition of the renderFunction. A basic example to guide you can be found in src/renderFunction.js:
+```javascript
+const renderFunction = (data, canvas) => {
+  const ctx = canvas.getContext("2d");
+  renderGradientBackground(ctx, canvas);
+  renderText(ctx, data);
+
+  if (typeof window.render_completed === "function") {
+    window.render_completed();
+  }
+};
+```
