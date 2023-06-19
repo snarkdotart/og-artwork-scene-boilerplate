@@ -48,21 +48,6 @@ To preview the build, run:
 npm run preview
 ```
 
-## Rendering
-You are encouraged to create your own rendition of the renderFunction. A basic example to guide you can be found in src/renderFunction.js:
-```javascript
-const renderFunction = (data, canvas) => {
-  const ctx = canvas.getContext("2d");
-  renderGradientBackground(ctx, canvas);
-  renderText(ctx, data);
-  renderShape(ctx, data);
-
-  if (typeof window.render_completed === "function") {
-    window.render_completed();
-  }
-};
-```
-
 ## Trait Generation
 Simple example of generation traits can be found in src/onRun.js:
 ```javascript
@@ -84,3 +69,34 @@ function onRun(input) {
   };
 }
 ```
+## Trait Object
+output of onRun function should be a trait object with the following structure:
+```json
+{
+    "traits": {
+        "color": "Blue"
+    },
+    "properties": {
+        "shape": "Star"
+    }
+}
+```
+This object will be passed to the renderFunction.
+
+## Rendering
+You are encouraged to create your own rendition of the renderFunction. A basic example to guide you can be found in src/renderFunction.js:
+```javascript
+const renderFunction = (data, canvas) => {
+  const ctx = canvas.getContext("2d");
+  renderGradientBackground(ctx, canvas);
+  renderText(ctx, data);
+  renderShape(ctx, data);
+
+  if (typeof window.render_completed === "function") {
+    window.render_completed();
+  }
+};
+```
+
+
+

@@ -12,7 +12,6 @@ const renderShape = (ctx, data) => {
     Yellow: "yellow",
     Black: "black",
   };
-
   const shape = data.properties.shape;
   const color = colorMap[data.traits.color];
 
