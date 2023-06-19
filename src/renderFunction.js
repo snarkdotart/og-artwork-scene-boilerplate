@@ -3,27 +3,34 @@ const getRandomColor = () => {
   return `hsl(${hue}, 100%, 50%)`;
 };
 
-const renderFunction = (data, canvas) => {
-  const ctx = canvas.getContext("2d");
-
-  // draw bg
+const renderGradientBackground = (ctx, canvas) => {
   ctx.imageSmoothingEnabled = true;
-  let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
   gradient.addColorStop(0, getRandomColor());
   gradient.addColorStop(1, getRandomColor());
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  // draw text
+};
+
+const renderText = (ctx, data) => {
   ctx.fillStyle = "black";
   ctx.font = "15px monospace";
   const text = JSON.stringify(data, null, 2);
-  var lines = text.split("\n");
+  const lines = text.split("\n");
 
-  for (var i = 0; i < lines.length; i++) {
-    ctx.fillText(lines[i], 10, 20 + i * 20);
+  lines.forEach((line, index) => {
+    ctx.fillText(line, 10, 20 + index * 20);
+  });
+};
+
+const renderFunction = (data, canvas) => {
+  const ctx = canvas.getContext("2d");
+  renderGradientBackground(ctx, canvas);
+  renderText(ctx, data);
+
+  if (typeof window.render_completed === "function") {
+    window.render_completed();
   }
-  // eslint-disable-next-line no-undef
-  window.render_completed();
 };
 
 export { renderFunction };
