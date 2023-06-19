@@ -3,7 +3,7 @@ const getRandomColor = () => {
   return `hsl(${hue}, 100%, 50%)`;
 };
 
-const render_function = (data, canvas) => {
+const renderFunction = (data, canvas) => {
   const ctx = canvas.getContext("2d");
 
   // draw bg
@@ -26,4 +26,4 @@ const render_function = (data, canvas) => {
   window.render_completed();
 };
 
-export { render_function };
+export { renderFunction };
