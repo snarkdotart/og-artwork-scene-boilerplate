@@ -55,9 +55,32 @@ const renderFunction = (data, canvas) => {
   const ctx = canvas.getContext("2d");
   renderGradientBackground(ctx, canvas);
   renderText(ctx, data);
+  renderShape(ctx, data);
 
   if (typeof window.render_completed === "function") {
     window.render_completed();
   }
 };
+```
+
+## Trait Generation
+Simple example of generation traits can be found in src/onRun.js:
+```javascript
+function onRun(input) {
+  const seed = parseInt(input.seed, 16);
+  const colorRandom = seededRandom(seed);
+  const shapeRandom = seededRandom(seed * 2);
+
+  const color = getValue(colorRandom, colorTraits);
+  const shape = getValue(shapeRandom, shapeProperties);
+
+  return {
+    traits: {
+      color: color,
+    },
+    properties: {
+      shape: shape,
+    },
+  };
+}
 ```
