@@ -55,6 +55,7 @@ function onRun(input) {
     },
     properties: {
       shape: shape,
+      seed: seed,
     },
   };
 }
