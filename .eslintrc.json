@@ -3,5 +3,8 @@
     "eslint:recommended",
     "plugin:import/recommended",
     "eslint-config-prettier"
-  ]
+  ],
+  "env": {
+    "browser": true
+  }
 }

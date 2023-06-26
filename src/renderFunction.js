@@ -109,7 +109,17 @@ const renderGradientBackground = (ctx, canvas) => {
 const renderText = (ctx, data) => {
   ctx.fillStyle = "black";
   ctx.font = "15px monospace";
-  const text = JSON.stringify(data, null, 2);
+  const text = JSON.stringify(
+    {
+      data,
+      ...{
+        date:
+          new Date().toLocaleTimeString() + ", " + new Date().toDateString(),
+      },
+    },
+    null,
+    2
+  );
   const lines = text.split("\n");
 
   lines.forEach((line, index) => {
