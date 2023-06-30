@@ -1,6 +1,6 @@
 // A function that takes an integer seed and returns a pseudo-random number
 function seededRandom(seed) {
-  const x = Math.sin(seed++) * 10000;
+  const x = Math.sin(Number(seed)) * 10000;
   return x - Math.floor(x);
 }
 
@@ -31,32 +31,49 @@ const shapeProperties = [
   { name: "Star", probability: 0.1 },
 ];
 
+// Size traits with corresponding probabilities
+const sizeTraits = [
+  { name: "Small", probability: 0.2 },
+  { name: "Medium", probability: 0.6 },
+  { name: "Big", probability: 0.2 },
+];
+
 /*
 onRun is the main function that gets invoked on every generate request
 It returns the new state of a token and takes the current state as an input object
+Be careful with returning big integer values they may be stored incorrectly, better use strings
 
 input - an object that represents the current state of a token
   - token_id - ID of the token
+  - generation - integer value, increases after every render request. 0 - just minted token
   - seed - a hex value, unique to every token e.g. "0x3f13cb3..."
   - traits - a key-value object of publicly available values
   - properties - a key-value object of privately available values
 */
 function onRun(input) {
-  const seed = parseInt(input.seed, 16);
+  let seed = BigInt(input.seed);
   const colorRandom = seededRandom(seed);
-  const shapeRandom = seededRandom(seed * 2);
+  seed++
+  const shapeRandom = seededRandom(seed * 2n);
+  seed++
+  const sizeRandom = seededRandom(seed * 3n);
 
   const color = getValue(colorRandom, colorTraits);
   const shape = getValue(shapeRandom, shapeProperties);
+  const size = getValue(sizeRandom, sizeTraits);
 
-  return {
+  let newState = {
     traits: {
       color: color,
+      size: size,
     },
     properties: {
+      generation: input.generation,
+      seed: input.seed,
       shape: shape,
-      seed: seed,
     },
   };
+
+  return newState;
 }
 export default onRun;
