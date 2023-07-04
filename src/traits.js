@@ -61,8 +61,10 @@ function onRun(input) {
   const color = getValue(colorRandom, colorTraits);
   const shape = getValue(shapeRandom, shapeProperties);
   const size = getValue(sizeRandom, sizeTraits);
+  const needsNewGeneration = input.generation % 5 === 0
 
   let newState = {
+    newGeneration: needsNewGeneration,
     traits: {
       color: color,
       size: size,
