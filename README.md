@@ -113,4 +113,23 @@ The data object passed to the renderFunction contains the traits and properties 
 }
 ```
 
+## Assets
+You can add your own assets to the project. The assets directory is located in src/public. You can add images, fonts, etc. to this directory and use them in your renderFunction.
+In example below, we are using an array of image paths to render the shape. Images located in src/public/images directory:
 
+```javascript
+// Array of image paths
+const imageNames = ['/images/beauty_010.png', '/images/beauty_030.png', '/images/beauty_050.png', '/images/beauty_070.png', '/images/beauty_090.png'];
+const renderShape = (data) => {
+    const gen = data.traits.Generation || 0;
+
+    // Create new image element
+    const img = document.createElement('img');
+
+    // Set the image source
+    img.src = imageNames[gen % imageNames.length];
+
+    // Append the image to the body of the document
+    document.body.appendChild(img);
+};
+```
