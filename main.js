@@ -1,6 +1,6 @@
 import "./style.css";
 import { renderFunction } from "./src/renderFunction.js";
-import onRun from "./src/traits.js";
+import onGenerateTokenState from "./src/traits.js";
 
 const randomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
@@ -46,7 +46,7 @@ const renderContent = async (render) => {
       const data = await response.json();
       handleResponse(data, render);
     } else {
-      const data = onRun({ seed: randomInt(0, 1000000) });
+      const data = onGenerateTokenState({ seed: randomInt(0, 1000000) });
       handleResponse(data, render);
     }
   } catch (error) {

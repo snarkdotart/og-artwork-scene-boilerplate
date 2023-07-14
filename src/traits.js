@@ -39,9 +39,17 @@ const sizeTraits = [
 ];
 
 /*
-onRun is the main function that gets invoked on every generate request
+onGenerateTokenState is the main function that gets invoked on every generate request
 It returns the new state of a token and takes the current state as an input object
 Be careful with returning big integer values they may be stored incorrectly, better use strings
+
+interface Input {
+  token_id: string;
+  generation: number;
+  seed: string;
+  traits: Record<string, any>;
+  properties: Record<string, any>;
+}
 
 input - an object that represents the current state of a token
   - token_id - ID of the token
@@ -50,20 +58,20 @@ input - an object that represents the current state of a token
   - traits - a key-value object of publicly available values
   - properties - a key-value object of privately available values
 */
-function onRun(input) {
+function onGenerateTokenState(input) {
   let seed = BigInt(input.seed);
   const colorRandom = seededRandom(seed);
-  seed++
+  seed++;
   const shapeRandom = seededRandom(seed * 2n);
-  seed++
+  seed++;
   const sizeRandom = seededRandom(seed * 3n);
 
   const color = getValue(colorRandom, colorTraits);
   const shape = getValue(shapeRandom, shapeProperties);
   const size = getValue(sizeRandom, sizeTraits);
-  const needsNewGeneration = input.generation % 5 === 0
+  const needsNewGeneration = input.generation % 5 === 0;
 
-  let newState = {
+  const newState = {
     newGeneration: needsNewGeneration,
     traits: {
       color: color,
@@ -78,4 +86,4 @@ function onRun(input) {
 
   return newState;
 }
-export default onRun;
+export default onGenerateTokenState;
